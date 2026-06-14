@@ -1,0 +1,21 @@
+node_modules/
+frontend/node_modules/
+demo-video/node_modules/
+
+frontend/dist/
+backend/target/
+
+.DS_Store
+*.log
+*.tmp
+.env
+.env.*
+!.env.example
+
+demo-video/.remotion/
+
+# Local video QA frames; keep final screenshots/video under docs.
+docs/demo-frame-*.png
+docs/video-check-*.jpg
+docs/revised-frame-*.png
+docs/revised-check-*.jpg

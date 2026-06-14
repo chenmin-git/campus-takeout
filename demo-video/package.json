@@ -1,0 +1,23 @@
+{
+  "name": "demo-video",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "still": "remotion still src/index.tsx CampusTakeoutH5AiDemo",
+    "render": "remotion render src/index.tsx CampusTakeoutH5AiDemo ../docs/campus-takeout-ai-h5-demo.mp4 --codec=h264 --pixel-format=yuv420p"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@remotion/captions": "^4.0.380",
+    "@remotion/cli": "^4.0.380",
+    "@remotion/media": "^4.0.380",
+    "playwright": "^1.60.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "remotion": "^4.0.380",
+    "typescript": "^5.9.3"
+  }
+}

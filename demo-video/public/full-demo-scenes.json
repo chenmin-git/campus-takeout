@@ -1,0 +1,367 @@
+[
+  {
+    "kind": "diagram",
+    "id": "overview",
+    "index": 1,
+    "title": "系统整体定位",
+    "subtitle": "这是一个面向校园场景的 H5 移动端外卖系统，覆盖点餐、接单、配送、运营和 AI 助手。",
+    "bullets": [
+      "四类角色：用户、商家、骑手、管理员",
+      "前端使用 Vue3 + Vant，适配手机竖屏演示",
+      "后端 Spring Boot + MyBatis-Plus，MySQL 存储业务数据",
+      "图片本地 uploads 相对路径保存，便于部署迁移"
+    ],
+    "startMs": 0,
+    "endMs": 4000,
+    "accent": "系统框架"
+  },
+  {
+    "kind": "diagram",
+    "id": "architecture",
+    "index": 2,
+    "title": "前后端架构",
+    "subtitle": "系统采用前后端分离结构，H5 通过 Vite 代理访问后端接口和本地图片资源。",
+    "bullets": [
+      "H5 页面层：路由、状态管理、接口封装、Vant 组件",
+      "业务接口层：认证、店铺、菜品、订单、评价、统计、上传",
+      "服务层：订单流转、配送时效、统计看板、AI Agent 编排",
+      "数据层：用户、店铺、菜品、订单、地址、评价、公告"
+    ],
+    "startMs": 4000,
+    "endMs": 8000,
+    "accent": "技术架构"
+  },
+  {
+    "kind": "diagram",
+    "id": "modules",
+    "index": 3,
+    "title": "核心功能模块",
+    "subtitle": "功能不是单页堆叠，而是围绕校园外卖完整业务闭环组织。",
+    "bullets": [
+      "用户端：浏览店铺、加购、下单、支付、售后、评价",
+      "商家端：店铺资料、菜品维护、接单、评价回复",
+      "骑手端：抢单、配送导航、送达、延期申请",
+      "管理员端：用户、店铺审核、订单、分类、公告和平台统计"
+    ],
+    "startMs": 8000,
+    "endMs": 12000,
+    "accent": "功能总览"
+  },
+  {
+    "kind": "diagram",
+    "id": "order-flow",
+    "index": 4,
+    "title": "订单状态流转",
+    "subtitle": "订单从用户下单开始，经过商家接单、骑手配送，最终完成或售后处理。",
+    "bullets": [
+      "待支付 -> 待接单 -> 待配送 -> 配送中 -> 已完成",
+      "商家接单后生成配送时效，骑手抢单后进入配送中",
+      "用户可取消、退款、确认收货和评价",
+      "管理员可全局查询订单状态，定位异常流程"
+    ],
+    "startMs": 12000,
+    "endMs": 16000,
+    "accent": "业务流程"
+  },
+  {
+    "kind": "diagram",
+    "id": "ai-design",
+    "index": 5,
+    "title": "AI 助手设计",
+    "subtitle": "AI 不是简单问答，而是结合真实业务数据的点餐 Agent。",
+    "bullets": [
+      "自然语言理解：推荐美食、查询订单、解释点餐问题",
+      "工具协议：先查真实店铺、菜品、地址、订单，再生成回复",
+      "写操作提案：下单、退款、取消、评价只生成确认卡片",
+      "用户二次确认后才调用业务接口，避免 AI 静默下单或扣款"
+    ],
+    "startMs": 16000,
+    "endMs": 20000,
+    "accent": "AI核心能力"
+  },
+  {
+    "kind": "diagram",
+    "id": "ai-security",
+    "index": 6,
+    "title": "AI 安全边界",
+    "subtitle": "AI 服务由后端代理，前端不暴露密钥；所有写操作以登录态为准。",
+    "bullets": [
+      "密钥只在后端配置，页面不展示服务商和敏感信息",
+      "Agent 不信任模型传入的用户身份，只使用服务端 userId",
+      "订单金额、起送价、状态归属仍由后端业务校验",
+      "演示中重点体现“可辅助、可确认、可追踪”"
+    ],
+    "startMs": 20000,
+    "endMs": 24000,
+    "accent": "AI核心能力"
+  },
+  {
+    "kind": "image",
+    "id": "login",
+    "index": 7,
+    "title": "登录与角色入口",
+    "subtitle": "登录页提供四类演示账号，方便答辩时快速切换用户、商家、骑手和管理员视角。",
+    "image": "screenshots/01-login-demo-accounts.png",
+    "startMs": 24000,
+    "endMs": 28000,
+    "accent": "系统入口"
+  },
+  {
+    "kind": "image",
+    "id": "user-home",
+    "index": 8,
+    "title": "用户端：首页点餐",
+    "subtitle": "用户端首页集中展示公告、分类和店铺列表，适合手机端快速进入点餐场景。",
+    "image": "screenshots/02-user-home-overview.png",
+    "startMs": 28000,
+    "endMs": 32000,
+    "accent": "用户端"
+  },
+  {
+    "kind": "image",
+    "id": "shop-detail",
+    "index": 9,
+    "title": "用户端：店铺与菜品",
+    "subtitle": "店铺详情展示菜品图片、价格、销量和评价入口，用户可以直接加入购物车。",
+    "image": "screenshots/04-shop-detail-coco-dishes.png",
+    "startMs": 32000,
+    "endMs": 36000,
+    "accent": "用户端"
+  },
+  {
+    "kind": "image",
+    "id": "order-confirm",
+    "index": 10,
+    "title": "用户端：下单确认",
+    "subtitle": "下单确认页把收货地址、备注、包装费、配送费和实付金额统一展示。",
+    "image": "screenshots/07-order-confirm-fees.png",
+    "startMs": 36000,
+    "endMs": 40000,
+    "accent": "用户端"
+  },
+  {
+    "kind": "image",
+    "id": "order-detail",
+    "index": 11,
+    "title": "用户端：订单跟踪",
+    "subtitle": "订单详情通过状态步骤条说明当前进度，帮助用户理解订单处于哪个环节。",
+    "image": "screenshots/09-order-detail-tracking.png",
+    "startMs": 40000,
+    "endMs": 44000,
+    "accent": "用户端"
+  },
+  {
+    "kind": "image",
+    "id": "ai-entry",
+    "index": 12,
+    "title": "AI 助手入口",
+    "subtitle": "智能助手是独立底部 Tab，用户可以像聊天一样提出点餐、查询和售后需求。",
+    "image": "screenshots/11-ai-assistant-empty.png",
+    "startMs": 44000,
+    "endMs": 48000,
+    "accent": "AI核心能力"
+  },
+  {
+    "kind": "image",
+    "id": "ai-input",
+    "index": 13,
+    "title": "自然语言点餐",
+    "subtitle": "用户无需记菜单和流程，直接输入“帮我推荐并买一杯奶茶”即可触发 Agent 流程。",
+    "image": "screenshots/12-ai-assistant-quick-order.png",
+    "startMs": 48000,
+    "endMs": 52000,
+    "accent": "AI核心能力"
+  },
+  {
+    "kind": "image",
+    "id": "ai-order",
+    "index": 14,
+    "title": "AI 下单确认卡片",
+    "subtitle": "AI 先查真实店铺和菜品，再生成确认卡片；只有用户点击确认才会真正下单支付。",
+    "image": "screenshots/13-ai-order-proposal-card.png",
+    "startMs": 52000,
+    "endMs": 56000,
+    "accent": "AI核心能力"
+  },
+  {
+    "kind": "image",
+    "id": "ai-query",
+    "index": 15,
+    "title": "AI 查询订单",
+    "subtitle": "只读查询可以自动执行，例如最近订单查询，并提供查看订单的快捷入口。",
+    "image": "screenshots/14-ai-order-query-action.png",
+    "startMs": 56000,
+    "endMs": 60000,
+    "accent": "AI核心能力"
+  },
+  {
+    "kind": "image",
+    "id": "ai-review",
+    "index": 16,
+    "title": "AI 评价提案",
+    "subtitle": "评价属于写操作，AI 只能生成待确认提案，最终提交由用户掌控。",
+    "image": "screenshots/15-ai-review-proposal-card.png",
+    "startMs": 60000,
+    "endMs": 64000,
+    "accent": "AI核心能力"
+  },
+  {
+    "kind": "image",
+    "id": "ai-refund",
+    "index": 17,
+    "title": "AI 退款提案",
+    "subtitle": "退款、取消等敏感操作同样需要二次确认，体现 AI 功能的安全边界。",
+    "image": "screenshots/16-ai-refund-proposal-card.png",
+    "startMs": 64000,
+    "endMs": 68000,
+    "accent": "AI核心能力"
+  },
+  {
+    "kind": "image",
+    "id": "user-dashboard",
+    "index": 18,
+    "title": "用户端：消费统计",
+    "subtitle": "用户工作台使用 ECharts 展示近六个月消费趋势，便于体现数据统计能力。",
+    "image": "screenshots/18-user-dashboard-stats.png",
+    "startMs": 68000,
+    "endMs": 72000,
+    "accent": "用户端"
+  },
+  {
+    "kind": "image",
+    "id": "merchant-dashboard",
+    "index": 19,
+    "title": "商家端：经营看板",
+    "subtitle": "商家端关注营收、订单数、待接单和本月经营数据，与用户端功能明显区分。",
+    "image": "screenshots/20-merchant-dashboard-stats.png",
+    "startMs": 72000,
+    "endMs": 76000,
+    "accent": "商家端"
+  },
+  {
+    "kind": "image",
+    "id": "merchant-dishes",
+    "index": 20,
+    "title": "商家端：菜品管理",
+    "subtitle": "菜品管理支持搜索、分类筛选、状态筛选、分页和上下架，是商家日常维护核心。",
+    "image": "screenshots/22-merchant-dishes-filter.png",
+    "startMs": 76000,
+    "endMs": 80000,
+    "accent": "商家端"
+  },
+  {
+    "kind": "image",
+    "id": "merchant-orders",
+    "index": 21,
+    "title": "商家端：订单处理",
+    "subtitle": "商家处理待接单订单，接单后订单进入待配送，等待骑手抢单。",
+    "image": "screenshots/24-merchant-orders-accept.png",
+    "startMs": 80000,
+    "endMs": 84000,
+    "accent": "商家端"
+  },
+  {
+    "kind": "image",
+    "id": "merchant-shop",
+    "index": 22,
+    "title": "商家端：店铺设置",
+    "subtitle": "店铺设置维护 Logo、封面、公告、起送价和配送费，支持本地图片上传。",
+    "image": "screenshots/26-merchant-shop-setting.png",
+    "startMs": 84000,
+    "endMs": 88000,
+    "accent": "商家端"
+  },
+  {
+    "kind": "image",
+    "id": "rider-dashboard",
+    "index": 23,
+    "title": "骑手端：配送工作台",
+    "subtitle": "骑手工作台突出可抢单、配送中、今日完成和累计收入，服务配送角色。",
+    "image": "screenshots/27-rider-dashboard-stats.png",
+    "startMs": 88000,
+    "endMs": 92000,
+    "accent": "骑手端"
+  },
+  {
+    "kind": "image",
+    "id": "rider-hall",
+    "index": 24,
+    "title": "骑手端：抢单大厅",
+    "subtitle": "抢单大厅展示待配送订单，骑手抢单后订单归属当前骑手。",
+    "image": "screenshots/28-rider-order-hall.png",
+    "startMs": 92000,
+    "endMs": 96000,
+    "accent": "骑手端"
+  },
+  {
+    "kind": "image",
+    "id": "rider-map",
+    "index": 25,
+    "title": "骑手端：配送导航",
+    "subtitle": "配送详情集成地图路线和订单信息，展示从商家到收货地址的配送过程。",
+    "image": "screenshots/30-rider-delivery-map.png",
+    "startMs": 96000,
+    "endMs": 100000,
+    "accent": "骑手端"
+  },
+  {
+    "kind": "image",
+    "id": "admin-dashboard",
+    "index": 26,
+    "title": "管理员端：平台总览",
+    "subtitle": "管理员工作台关注平台级用户、店铺、订单和营收，体现运营管理视角。",
+    "image": "screenshots/32-admin-dashboard-platform.png",
+    "startMs": 100000,
+    "endMs": 104000,
+    "accent": "管理员端"
+  },
+  {
+    "kind": "image",
+    "id": "admin-shops",
+    "index": 27,
+    "title": "管理员端：店铺审核",
+    "subtitle": "店铺审核支持通过、驳回、停业和恢复，控制商家入驻与经营状态。",
+    "image": "screenshots/34-admin-shop-audit.png",
+    "startMs": 104000,
+    "endMs": 108000,
+    "accent": "管理员端"
+  },
+  {
+    "kind": "image",
+    "id": "admin-orders",
+    "index": 28,
+    "title": "管理员端：全局订单",
+    "subtitle": "全局订单页支持状态筛选和关键词查询，便于定位平台异常订单。",
+    "image": "screenshots/35-admin-order-global-query.png",
+    "startMs": 108000,
+    "endMs": 112000,
+    "accent": "管理员端"
+  },
+  {
+    "kind": "image",
+    "id": "admin-users",
+    "index": 29,
+    "title": "管理员端：用户管理",
+    "subtitle": "用户管理支持禁用、启用、重置密码和删除，覆盖平台基础权限治理。",
+    "image": "screenshots/36-admin-user-management.png",
+    "startMs": 112000,
+    "endMs": 116000,
+    "accent": "管理员端"
+  },
+  {
+    "kind": "diagram",
+    "id": "summary",
+    "index": 30,
+    "title": "演示总结",
+    "subtitle": "系统以完整业务闭环为主线，用 AI 助手提升点餐效率，同时保留清晰安全边界。",
+    "bullets": [
+      "H5 竖屏适配，适合手机端和答辩演示",
+      "四端角色分工清楚，功能覆盖完整外卖流程",
+      "ECharts 工作台体现数据统计和运营能力",
+      "AI Agent 重点体现自然语言业务操作和二次确认安全机制"
+    ],
+    "startMs": 116000,
+    "endMs": 120000,
+    "accent": "系统亮点"
+  }
+]

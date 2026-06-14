@@ -1,0 +1,212 @@
+[
+  {
+    "text": "这是一个面向校园场景的 H5 移动端外卖系统，覆盖点餐、接单、配送、运营和 AI 助手。",
+    "startMs": 0,
+    "endMs": 4000,
+    "timestampMs": 0,
+    "confidence": 1
+  },
+  {
+    "text": "系统采用前后端分离结构，H5 通过 Vite 代理访问后端接口和本地图片资源。",
+    "startMs": 4000,
+    "endMs": 8000,
+    "timestampMs": 4000,
+    "confidence": 1
+  },
+  {
+    "text": "功能不是单页堆叠，而是围绕校园外卖完整业务闭环组织。",
+    "startMs": 8000,
+    "endMs": 12000,
+    "timestampMs": 8000,
+    "confidence": 1
+  },
+  {
+    "text": "订单从用户下单开始，经过商家接单、骑手配送，最终完成或售后处理。",
+    "startMs": 12000,
+    "endMs": 16000,
+    "timestampMs": 12000,
+    "confidence": 1
+  },
+  {
+    "text": "AI 不是简单问答，而是结合真实业务数据的点餐 Agent。",
+    "startMs": 16000,
+    "endMs": 20000,
+    "timestampMs": 16000,
+    "confidence": 1
+  },
+  {
+    "text": "AI 服务由后端代理，前端不暴露密钥；所有写操作以登录态为准。",
+    "startMs": 20000,
+    "endMs": 24000,
+    "timestampMs": 20000,
+    "confidence": 1
+  },
+  {
+    "text": "登录页提供四类演示账号，方便答辩时快速切换用户、商家、骑手和管理员视角。",
+    "startMs": 24000,
+    "endMs": 28000,
+    "timestampMs": 24000,
+    "confidence": 1
+  },
+  {
+    "text": "用户端首页集中展示公告、分类和店铺列表，适合手机端快速进入点餐场景。",
+    "startMs": 28000,
+    "endMs": 32000,
+    "timestampMs": 28000,
+    "confidence": 1
+  },
+  {
+    "text": "店铺详情展示菜品图片、价格、销量和评价入口，用户可以直接加入购物车。",
+    "startMs": 32000,
+    "endMs": 36000,
+    "timestampMs": 32000,
+    "confidence": 1
+  },
+  {
+    "text": "下单确认页把收货地址、备注、包装费、配送费和实付金额统一展示。",
+    "startMs": 36000,
+    "endMs": 40000,
+    "timestampMs": 36000,
+    "confidence": 1
+  },
+  {
+    "text": "订单详情通过状态步骤条说明当前进度，帮助用户理解订单处于哪个环节。",
+    "startMs": 40000,
+    "endMs": 44000,
+    "timestampMs": 40000,
+    "confidence": 1
+  },
+  {
+    "text": "智能助手是独立底部 Tab，用户可以像聊天一样提出点餐、查询和售后需求。",
+    "startMs": 44000,
+    "endMs": 48000,
+    "timestampMs": 44000,
+    "confidence": 1
+  },
+  {
+    "text": "用户无需记菜单和流程，直接输入“帮我推荐并买一杯奶茶”即可触发 Agent 流程。",
+    "startMs": 48000,
+    "endMs": 52000,
+    "timestampMs": 48000,
+    "confidence": 1
+  },
+  {
+    "text": "AI 先查真实店铺和菜品，再生成确认卡片；只有用户点击确认才会真正下单支付。",
+    "startMs": 52000,
+    "endMs": 56000,
+    "timestampMs": 52000,
+    "confidence": 1
+  },
+  {
+    "text": "只读查询可以自动执行，例如最近订单查询，并提供查看订单的快捷入口。",
+    "startMs": 56000,
+    "endMs": 60000,
+    "timestampMs": 56000,
+    "confidence": 1
+  },
+  {
+    "text": "评价属于写操作，AI 只能生成待确认提案，最终提交由用户掌控。",
+    "startMs": 60000,
+    "endMs": 64000,
+    "timestampMs": 60000,
+    "confidence": 1
+  },
+  {
+    "text": "退款、取消等敏感操作同样需要二次确认，体现 AI 功能的安全边界。",
+    "startMs": 64000,
+    "endMs": 68000,
+    "timestampMs": 64000,
+    "confidence": 1
+  },
+  {
+    "text": "用户工作台使用 ECharts 展示近六个月消费趋势，便于体现数据统计能力。",
+    "startMs": 68000,
+    "endMs": 72000,
+    "timestampMs": 68000,
+    "confidence": 1
+  },
+  {
+    "text": "商家端关注营收、订单数、待接单和本月经营数据，与用户端功能明显区分。",
+    "startMs": 72000,
+    "endMs": 76000,
+    "timestampMs": 72000,
+    "confidence": 1
+  },
+  {
+    "text": "菜品管理支持搜索、分类筛选、状态筛选、分页和上下架，是商家日常维护核心。",
+    "startMs": 76000,
+    "endMs": 80000,
+    "timestampMs": 76000,
+    "confidence": 1
+  },
+  {
+    "text": "商家处理待接单订单，接单后订单进入待配送，等待骑手抢单。",
+    "startMs": 80000,
+    "endMs": 84000,
+    "timestampMs": 80000,
+    "confidence": 1
+  },
+  {
+    "text": "店铺设置维护 Logo、封面、公告、起送价和配送费，支持本地图片上传。",
+    "startMs": 84000,
+    "endMs": 88000,
+    "timestampMs": 84000,
+    "confidence": 1
+  },
+  {
+    "text": "骑手工作台突出可抢单、配送中、今日完成和累计收入，服务配送角色。",
+    "startMs": 88000,
+    "endMs": 92000,
+    "timestampMs": 88000,
+    "confidence": 1
+  },
+  {
+    "text": "抢单大厅展示待配送订单，骑手抢单后订单归属当前骑手。",
+    "startMs": 92000,
+    "endMs": 96000,
+    "timestampMs": 92000,
+    "confidence": 1
+  },
+  {
+    "text": "配送详情集成地图路线和订单信息，展示从商家到收货地址的配送过程。",
+    "startMs": 96000,
+    "endMs": 100000,
+    "timestampMs": 96000,
+    "confidence": 1
+  },
+  {
+    "text": "管理员工作台关注平台级用户、店铺、订单和营收，体现运营管理视角。",
+    "startMs": 100000,
+    "endMs": 104000,
+    "timestampMs": 100000,
+    "confidence": 1
+  },
+  {
+    "text": "店铺审核支持通过、驳回、停业和恢复，控制商家入驻与经营状态。",
+    "startMs": 104000,
+    "endMs": 108000,
+    "timestampMs": 104000,
+    "confidence": 1
+  },
+  {
+    "text": "全局订单页支持状态筛选和关键词查询，便于定位平台异常订单。",
+    "startMs": 108000,
+    "endMs": 112000,
+    "timestampMs": 108000,
+    "confidence": 1
+  },
+  {
+    "text": "用户管理支持禁用、启用、重置密码和删除，覆盖平台基础权限治理。",
+    "startMs": 112000,
+    "endMs": 116000,
+    "timestampMs": 112000,
+    "confidence": 1
+  },
+  {
+    "text": "系统以完整业务闭环为主线，用 AI 助手提升点餐效率，同时保留清晰安全边界。",
+    "startMs": 116000,
+    "endMs": 120000,
+    "timestampMs": 116000,
+    "confidence": 1
+  }
+]

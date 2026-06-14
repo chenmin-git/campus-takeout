@@ -1,0 +1,230 @@
+[
+  {
+    "index": 1,
+    "slug": "login-demo-accounts",
+    "title": "登录页与四类演示账号",
+    "file": "docs/demo-screenshots/01-login-demo-accounts.png"
+  },
+  {
+    "index": 2,
+    "slug": "user-home-overview",
+    "title": "用户首页：公告、分类、店铺列表",
+    "file": "docs/demo-screenshots/02-user-home-overview.png"
+  },
+  {
+    "index": 3,
+    "slug": "user-home-shop-list",
+    "title": "用户首页：店铺列表与销量评分",
+    "file": "docs/demo-screenshots/03-user-home-shop-list.png"
+  },
+  {
+    "index": 4,
+    "slug": "shop-detail-coco-dishes",
+    "title": "店铺详情：CoCo都可奶茶菜品",
+    "file": "docs/demo-screenshots/04-shop-detail-coco-dishes.png"
+  },
+  {
+    "index": 5,
+    "slug": "shop-cart-selected",
+    "title": "点餐购物车：已选择商品",
+    "file": "docs/demo-screenshots/05-shop-cart-selected.png"
+  },
+  {
+    "index": 6,
+    "slug": "shop-cart-popup",
+    "title": "购物车浮层：商品数量与金额",
+    "file": "docs/demo-screenshots/06-shop-cart-popup.png"
+  },
+  {
+    "index": 7,
+    "slug": "order-confirm-fees",
+    "title": "订单确认：地址、备注、费用明细",
+    "file": "docs/demo-screenshots/07-order-confirm-fees.png"
+  },
+  {
+    "index": 8,
+    "slug": "user-orders-status-tabs",
+    "title": "我的订单：状态筛选与操作按钮",
+    "file": "docs/demo-screenshots/08-user-orders-status-tabs.png"
+  },
+  {
+    "index": 9,
+    "slug": "order-detail-tracking",
+    "title": "订单详情：状态跟踪与商品明细",
+    "file": "docs/demo-screenshots/09-order-detail-tracking.png"
+  },
+  {
+    "index": 10,
+    "slug": "order-detail-fees-sla",
+    "title": "订单详情：费用、订单号与售后入口",
+    "file": "docs/demo-screenshots/10-order-detail-fees-sla.png"
+  },
+  {
+    "index": 11,
+    "slug": "ai-assistant-empty",
+    "title": "智能助手：全屏对话入口",
+    "file": "docs/demo-screenshots/11-ai-assistant-empty.png"
+  },
+  {
+    "index": 12,
+    "slug": "ai-assistant-quick-order",
+    "title": "智能助手：快捷指令填入下单需求",
+    "file": "docs/demo-screenshots/12-ai-assistant-quick-order.png"
+  },
+  {
+    "index": 13,
+    "slug": "ai-order-proposal-card",
+    "title": "AI下单：推荐真实店铺并生成确认卡片",
+    "file": "docs/demo-screenshots/13-ai-order-proposal-card.png"
+  },
+  {
+    "index": 14,
+    "slug": "ai-order-query-action",
+    "title": "AI查询：最近订单与查看入口",
+    "file": "docs/demo-screenshots/14-ai-order-query-action.png"
+  },
+  {
+    "index": 15,
+    "slug": "ai-review-proposal-card",
+    "title": "AI评价：写操作二次确认",
+    "file": "docs/demo-screenshots/15-ai-review-proposal-card.png"
+  },
+  {
+    "index": 16,
+    "slug": "ai-refund-proposal-card",
+    "title": "AI退款：确认前不改变订单状态",
+    "file": "docs/demo-screenshots/16-ai-refund-proposal-card.png"
+  },
+  {
+    "index": 17,
+    "slug": "user-address-list",
+    "title": "收货地址管理",
+    "file": "docs/demo-screenshots/17-user-address-list.png"
+  },
+  {
+    "index": 18,
+    "slug": "user-dashboard-stats",
+    "title": "用户消费工作台：近六月消费趋势",
+    "file": "docs/demo-screenshots/18-user-dashboard-stats.png"
+  },
+  {
+    "index": 19,
+    "slug": "user-profile-center",
+    "title": "我的：账号、工作台、地址入口",
+    "file": "docs/demo-screenshots/19-user-profile-center.png"
+  },
+  {
+    "index": 20,
+    "slug": "merchant-dashboard-stats",
+    "title": "商家工作台：营收和订单统计",
+    "file": "docs/demo-screenshots/20-merchant-dashboard-stats.png"
+  },
+  {
+    "index": 21,
+    "slug": "merchant-dashboard-charts",
+    "title": "商家工作台：营业额与热销菜品图表",
+    "file": "docs/demo-screenshots/21-merchant-dashboard-charts.png"
+  },
+  {
+    "index": 22,
+    "slug": "merchant-dishes-filter",
+    "title": "菜品管理：分页、搜索、筛选",
+    "file": "docs/demo-screenshots/22-merchant-dishes-filter.png"
+  },
+  {
+    "index": 23,
+    "slug": "merchant-dish-edit-dialog",
+    "title": "菜品管理：新增菜品与图片上传",
+    "file": "docs/demo-screenshots/23-merchant-dish-edit-dialog.png"
+  },
+  {
+    "index": 24,
+    "slug": "merchant-orders-accept",
+    "title": "商家订单：待接单与接单处理",
+    "file": "docs/demo-screenshots/24-merchant-orders-accept.png"
+  },
+  {
+    "index": 25,
+    "slug": "merchant-review-reply",
+    "title": "评价管理：商家回复用户评价",
+    "file": "docs/demo-screenshots/25-merchant-review-reply.png"
+  },
+  {
+    "index": 26,
+    "slug": "merchant-shop-setting",
+    "title": "店铺设置：封面、Logo、营业参数",
+    "file": "docs/demo-screenshots/26-merchant-shop-setting.png"
+  },
+  {
+    "index": 27,
+    "slug": "rider-dashboard-stats",
+    "title": "骑手工作台：可抢单与配送收入",
+    "file": "docs/demo-screenshots/27-rider-dashboard-stats.png"
+  },
+  {
+    "index": 28,
+    "slug": "rider-order-hall",
+    "title": "抢单大厅：待配送订单",
+    "file": "docs/demo-screenshots/28-rider-order-hall.png"
+  },
+  {
+    "index": 29,
+    "slug": "rider-my-deliveries",
+    "title": "我的配送：配送中与已完成",
+    "file": "docs/demo-screenshots/29-rider-my-deliveries.png"
+  },
+  {
+    "index": 30,
+    "slug": "rider-delivery-map",
+    "title": "配送导航：地图路线与配送状态",
+    "file": "docs/demo-screenshots/30-rider-delivery-map.png"
+  },
+  {
+    "index": 31,
+    "slug": "rider-extend-request",
+    "title": "配送时效：骑手申请延期",
+    "file": "docs/demo-screenshots/31-rider-extend-request.png"
+  },
+  {
+    "index": 32,
+    "slug": "admin-dashboard-platform",
+    "title": "管理员工作台：平台核心指标",
+    "file": "docs/demo-screenshots/32-admin-dashboard-platform.png"
+  },
+  {
+    "index": 33,
+    "slug": "admin-dashboard-charts",
+    "title": "管理员工作台：营收订单与分布图",
+    "file": "docs/demo-screenshots/33-admin-dashboard-charts.png"
+  },
+  {
+    "index": 34,
+    "slug": "admin-shop-audit",
+    "title": "店铺审核：通过、驳回、停业",
+    "file": "docs/demo-screenshots/34-admin-shop-audit.png"
+  },
+  {
+    "index": 35,
+    "slug": "admin-order-global-query",
+    "title": "全局订单：状态搜索与分页",
+    "file": "docs/demo-screenshots/35-admin-order-global-query.png"
+  },
+  {
+    "index": 36,
+    "slug": "admin-user-management",
+    "title": "用户管理：禁用、重置密码、删除",
+    "file": "docs/demo-screenshots/36-admin-user-management.png"
+  },
+  {
+    "index": 37,
+    "slug": "admin-category-management",
+    "title": "分类管理：图标与排序维护",
+    "file": "docs/demo-screenshots/37-admin-category-management.png"
+  },
+  {
+    "index": 38,
+    "slug": "admin-notice-management",
+    "title": "公告管理：首页公告维护",
+    "file": "docs/demo-screenshots/38-admin-notice-management.png"
+  }
+]
