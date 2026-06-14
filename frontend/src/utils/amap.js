@@ -4,8 +4,8 @@
 import AMapLoader from '@amap/amap-jsapi-loader'
 
 // JSAPI Key 与安全密钥（Web端）。安全密钥用于高德安全校验，前端必需配置。
-const AMAP_KEY = '67c71e04a88bfb6bb21bda4ec4f809c7'
-const AMAP_SECURITY = '14c4171cda94a92965f7e67f64f86d15'
+const AMAP_KEY = import.meta.env.VITE_AMAP_KEY || ''
+const AMAP_SECURITY = import.meta.env.VITE_AMAP_SECURITY || ''
 
 // 演示用校园中心坐标（杭州），无真实经纬度的地址在此基础上做小幅偏移定位
 export const CAMPUS_CENTER = [120.1614, 30.2741]
@@ -15,6 +15,9 @@ let amapPromise = null
 // 加载高德 JSAPI（单例），返回全局 AMap 对象
 export function loadAMap() {
   if (amapPromise) return amapPromise
+  if (!AMAP_KEY || !AMAP_SECURITY) {
+    return Promise.reject(new Error('请先配置 VITE_AMAP_KEY 和 VITE_AMAP_SECURITY'))
+  }
   window._AMapSecurityConfig = { securityJsCode: AMAP_SECURITY }
   amapPromise = AMapLoader.load({
     key: AMAP_KEY,

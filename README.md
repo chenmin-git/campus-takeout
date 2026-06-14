@@ -15,6 +15,24 @@
 - 前端端口：**5175**（Vite 代理 `/api`、`/uploads` 到后端）
 - 图片本地存储于 `uploads/`，数据库只存相对路径（如 `uploads/dish/xxx.jpg`），不依赖任何外部 CDN。演示图片为按业务主题（菜品/店铺/分类/头像）下载到本地的真实图片。
 
+## 演示素材
+
+- 竖屏 H5 演示视频：`docs/campus-takeout-ai-h5-demo.mp4`
+- 功能截图目录：`docs/demo-screenshots/`
+- 视频工程：`demo-video/`，画面顺序与讲解文案在 `demo-video/public/full-demo-scenes.json`、`demo-video/public/full-demo-captions.json`
+
+演示视频重点覆盖系统框架、用户点餐、AI 助手下单/查询/评价/退款提案、商家管理、骑手配送地图、管理员审核与统计。
+
+### 截图预览
+
+| 登录与角色入口 | 用户首页 | AI 下单确认 |
+|---|---|---|
+| ![登录与角色入口](docs/demo-screenshots/01-login-demo-accounts.png) | ![用户首页](docs/demo-screenshots/02-user-home-overview.png) | ![AI 下单确认](docs/demo-screenshots/13-ai-order-proposal-card.png) |
+
+| 骑手配送地图 | 商家菜品管理 | 管理员平台总览 |
+|---|---|---|
+| ![骑手配送地图](docs/demo-screenshots/30-rider-delivery-map.png) | ![商家菜品管理](docs/demo-screenshots/22-merchant-dishes-filter.png) | ![管理员平台总览](docs/demo-screenshots/32-admin-dashboard-platform.png) |
+
 ## 目录结构
 
 ```
@@ -31,8 +49,19 @@ campus-takeout/
 ### 1. 初始化数据库
 
 ```bash
-mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS campus_takeout DEFAULT CHARACTER SET utf8mb4;"
-mysql -uroot -proot campus_takeout < sql/init.sql
+mysql -uroot -proot < sql/init.sql
+```
+
+`sql/init.sql` 是从本机 `campus_takeout` 数据库重新导出的完整建库、建表与演示数据文件，包含 9 张表：用户、店铺、菜品、订单、订单明细、地址、评价、分类、公告。
+
+重新导出命令：
+
+```bash
+mysqldump -uroot -proot --databases campus_takeout \
+  --default-character-set=utf8mb4 \
+  --single-transaction --routines --triggers --events \
+  --skip-comments --column-statistics=0 --set-gtid-purged=OFF \
+  > sql/init.sql
 ```
 
 > 如数据库账号/密码不同，推荐通过环境变量覆盖：`DB_URL`、`DB_USERNAME`、`DB_PASSWORD`，可参考 `.env.example`。
@@ -61,10 +90,38 @@ curl -X POST http://localhost:8090/api/auth/login \
 ```bash
 cd frontend
 npm install
+# 配置高德地图 JSAPI Key 与安全密钥，配送导航需要
+export VITE_AMAP_KEY=your-amap-jsapi-key
+export VITE_AMAP_SECURITY=your-amap-security-js-code
 npm run dev
 ```
 
 浏览器打开 http://localhost:5175 ，在开发者工具中切换到手机视图（如 iPhone）体验。
+
+## 密钥申请与替换位置
+
+### AI 助手
+
+- 申请入口：讯飞开放平台控制台 https://console.xfyun.cn/
+- 接口类型：星火大模型 / OpenAI 兼容 Chat Completions
+- 替换位置：后端环境变量 `AI_API_PASSWORD`
+- 可选配置：`AI_API_URL`、`AI_MODEL`
+- 示例文件：`.env.example`
+- 代码读取位置：`backend/src/main/resources/application.yml`
+
+本项目已隐藏真实 AI 口令，开源仓库中不会提交真实 `AI_API_PASSWORD`。未配置 AI 口令时，登录、点餐、订单、商家、骑手、管理员等基础功能仍可运行，AI 对话接口不可用。
+
+### 高德地图
+
+- 申请入口：高德开放平台控制台 https://console.amap.com/dev/key/app
+- 官方准备文档：https://lbs.amap.com/api/javascript-api/guide/abc/prepare
+- Key 类型：Web 端 JSAPI Key
+- 需要能力：JavaScript API 2.0、路线规划/Driving 插件
+- 替换位置：前端环境变量 `VITE_AMAP_KEY`、`VITE_AMAP_SECURITY`
+- 示例文件：`.env.example`
+- 代码读取位置：`frontend/src/utils/amap.js`
+
+注意：高德 Web 端 JSAPI Key 会在浏览器前端使用，不能像后端密钥一样完全隐藏；建议在高德控制台配置域名白名单和安全密钥，避免直接复用个人生产 Key。
 
 ## 演示账号（密码均为 `123456`）
 
