@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -119,7 +120,7 @@ public class AgentService {
 
         // ReAct 循环：模型 → 工具 → 回灌 → 模型 …
         for (int turn = 0; turn < MAX_TURNS; turn++) {
-            String content = callModel(messages);
+            String content = callModel(messages, dto);
             JSONObject toolCall = extractTool(content);
             if (toolCall == null) {
                 // 没有工具调用 = 最终自然语言答复
@@ -142,6 +143,11 @@ public class AgentService {
         return result;
     }
 
+    /** 后端是否已经配置了 AI 口令；未配置时前端可以引导用户临时填写 */
+    public boolean hasServerConfig() {
+        return StringUtils.hasText(apiPassword);
+    }
+
     /**
      * 注入一段「下单」全流程的 few-shot 示例对话：用真实的工具调用/回灌格式做示范，
      * 显著提升弱模型对工具协议的遵循度（避免它凭空作答或只描述步骤而不调用工具）。
@@ -160,16 +166,22 @@ public class AgentService {
     }
 
     /** 调用大模型对话接口（与问答助手同款配置，密钥仅在后端） */
-    private String callModel(JSONArray messages) {
+    private String callModel(JSONArray messages, AiChatDTO dto) {
+        String effectiveApiUrl = StringUtils.hasText(apiUrl) ? apiUrl : dto.getApiUrl();
+        String effectivePassword = StringUtils.hasText(apiPassword) ? apiPassword : dto.getApiPassword();
+        String effectiveModel = StringUtils.hasText(model) ? model : dto.getModel();
+        if (!StringUtils.hasText(effectiveApiUrl) || !StringUtils.hasText(effectivePassword) || !StringUtils.hasText(effectiveModel)) {
+            throw new BusinessException("请先配置 AI 接口地址、口令和模型");
+        }
         JSONObject body = new JSONObject();
-        body.set("model", model);
+        body.set("model", effectiveModel);
         body.set("messages", messages);
         body.set("temperature", 0.3);
         body.set("max_tokens", maxTokens);
         body.set("stream", false);
 
-        try (HttpResponse resp = HttpRequest.post(apiUrl)
-                .header("Authorization", "Bearer " + apiPassword)
+        try (HttpResponse resp = HttpRequest.post(effectiveApiUrl)
+                .header("Authorization", "Bearer " + effectivePassword)
                 .header("Content-Type", "application/json")
                 .body(body.toString())
                 .timeout(30000)

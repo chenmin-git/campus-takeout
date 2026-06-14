@@ -67,6 +67,7 @@
         placeholder="说点什么，例如：帮我买一杯奶茶"
         @keyup.enter="send"
       />
+      <van-button plain round size="small" color="#ff6b35" @click="showAiConfig = true">配置</van-button>
       <van-button
         type="primary"
         color="#ff6b35"
@@ -75,11 +76,28 @@
         @click="send"
       >发送</van-button>
     </div>
+
+    <van-dialog
+      v-model:show="showAiConfig"
+      title="配置 AI 助手"
+      show-cancel-button
+      confirm-button-text="保存"
+      @confirm="saveAiConfig"
+    >
+      <div class="config-form">
+        <van-field v-model="aiForm.apiUrl" label="接口地址" placeholder="OpenAI 兼容接口地址" />
+        <van-field v-model="aiForm.apiPassword" label="口令" type="password" placeholder="填写 APIPassword 或 API Key" />
+        <van-field v-model="aiForm.model" label="模型" placeholder="例如 generalv3" />
+        <div class="config-link">
+          申请地址：<a href="https://console.xfyun.cn/" target="_blank">讯飞开放平台控制台</a>
+        </div>
+      </div>
+    </van-dialog>
   </div>
 </template>
 
 <script>
-import { nextTick, ref } from 'vue'
+import { nextTick, onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showConfirmDialog, showSuccessToast } from 'vant'
 import { aiApi, orderApi, reviewApi } from '../../api'
@@ -92,6 +110,13 @@ export default {
     const input = ref('')
     const loading = ref(false)
     const listRef = ref(null)
+    const serverAiConfigured = ref(false)
+    const showAiConfig = ref(false)
+    const aiForm = reactive({
+      apiUrl: localStorage.getItem('ai_api_url') || 'https://spark-api-open.xf-yun.com/v1/chat/completions',
+      apiPassword: localStorage.getItem('ai_api_password') || '',
+      model: localStorage.getItem('ai_model') || 'generalv3'
+    })
 
     const quickCmds = [
       '帮我推荐并买一杯奶茶',
@@ -99,6 +124,18 @@ export default {
       '给最近完成的订单评价5星',
       '帮我退款最近的订单'
     ]
+
+    onMounted(async () => {
+      try {
+        const res = await aiApi.config()
+        serverAiConfigured.value = !!(res.data && res.data.configured)
+      } catch (e) {
+        serverAiConfigured.value = false
+      }
+      if (!serverAiConfigured.value && !localStorage.getItem('ai_api_password')) {
+        showAiConfig.value = true
+      }
+    })
 
     // 滚动到底部，保证最新消息可见
     const scrollToBottom = () => {
@@ -111,6 +148,24 @@ export default {
     const useQuick = (q) => {
       input.value = q
     }
+
+    const saveAiConfig = () => {
+      if (!aiForm.apiUrl.trim() || !aiForm.apiPassword.trim() || !aiForm.model.trim()) {
+        showToast('请填写完整 AI 配置')
+        return false
+      }
+      localStorage.setItem('ai_api_url', aiForm.apiUrl.trim())
+      localStorage.setItem('ai_api_password', aiForm.apiPassword.trim())
+      localStorage.setItem('ai_model', aiForm.model.trim())
+      showSuccessToast('AI 配置已保存')
+      return true
+    }
+
+    const getAiConfig = () => ({
+      apiUrl: localStorage.getItem('ai_api_url') || aiForm.apiUrl,
+      apiPassword: localStorage.getItem('ai_api_password') || aiForm.apiPassword,
+      model: localStorage.getItem('ai_model') || aiForm.model
+    })
 
     const goAction = (a) => {
       if (a.orderId) router.push('/order/' + a.orderId)
@@ -188,6 +243,11 @@ export default {
     const send = async () => {
       const text = input.value.trim()
       if (!text || loading.value) return
+      if (!serverAiConfigured.value && !localStorage.getItem('ai_api_password')) {
+        showAiConfig.value = true
+        showToast('请先配置 AI 口令')
+        return
+      }
       messages.value.push({ role: 'user', content: text })
       input.value = ''
       loading.value = true
@@ -196,7 +256,7 @@ export default {
       // 只发送 role/content，actions 仅用于前端渲染
       const history = messages.value.map((m) => ({ role: m.role, content: m.content }))
       try {
-        const res = await aiApi.agent(history)
+        const res = await aiApi.agent(history, getAiConfig())
         const data = res.data || {}
         messages.value.push({
           role: 'assistant',
@@ -206,15 +266,33 @@ export default {
           proposal: data.proposal ? { ...data.proposal, _state: 'pending' } : null
         })
       } catch (e) {
-        showToast('智能助手暂时不可用，请稍后再试')
-        messages.value.push({ role: 'assistant', content: '智能助手暂时不可用，请稍后再试' })
+        showAiConfig.value = true
+        showToast('请检查 AI 配置')
+        messages.value.push({
+          role: 'assistant',
+          content: '智能助手暂时不可用，请先配置 AI 口令。申请地址：https://console.xfyun.cn/'
+        })
       } finally {
         loading.value = false
         scrollToBottom()
       }
     }
 
-    return { messages, input, loading, listRef, quickCmds, useQuick, goAction, confirmProposal, cancelProposal, send }
+    return {
+      messages,
+      input,
+      loading,
+      listRef,
+      quickCmds,
+      showAiConfig,
+      aiForm,
+      useQuick,
+      saveAiConfig,
+      goAction,
+      confirmProposal,
+      cancelProposal,
+      send
+    }
   }
 }
 </script>
@@ -350,5 +428,16 @@ export default {
   background: #f5f5f5;
   border-radius: 18px;
   padding: 4px 12px;
+}
+.config-form {
+  padding: 12px 8px 4px;
+}
+.config-link {
+  padding: 8px 16px 12px;
+  font-size: 12px;
+  color: #666;
+}
+.config-link a {
+  color: #ff6b35;
 }
 </style>

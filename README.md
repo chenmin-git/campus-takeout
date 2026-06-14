@@ -111,6 +111,8 @@ npm run dev
 
 本项目已隐藏真实 AI 口令，开源仓库中不会提交真实 `AI_API_PASSWORD`。未配置 AI 口令时，登录、点餐、订单、商家、骑手、管理员等基础功能仍可运行，AI 对话接口不可用。
 
+前台兜底：如果后端没有配置 `AI_API_PASSWORD`，用户进入「智能助手」页面时会弹出配置框，可直接填写接口地址、口令和模型；配置仅保存在当前浏览器 `localStorage`，不会写入数据库或提交到仓库。
+
 ### 高德地图
 
 - 申请入口：高德开放平台控制台 https://console.amap.com/dev/key/app
@@ -122,6 +124,8 @@ npm run dev
 - 代码读取位置：`frontend/src/utils/amap.js`
 
 注意：高德 Web 端 JSAPI Key 会在浏览器前端使用，不能像后端密钥一样完全隐藏；建议在高德控制台配置域名白名单和安全密钥，避免直接复用个人生产 Key。
+
+前台兜底：如果没有配置 `VITE_AMAP_KEY` / `VITE_AMAP_SECURITY`，配送地图区域会显示「去申请」和「手动填写」入口；填写后同样只保存在当前浏览器 `localStorage`。
 
 ## 演示账号（密码均为 `123456`）
 

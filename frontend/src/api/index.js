@@ -97,10 +97,11 @@ export const statsApi = {
 
 // ============ 智能助手 ============
 export const aiApi = {
+  config: () => request.get('/ai/config'),
   // messages: [{ role: 'user' | 'assistant', content }]
-  chat: (messages) => request.post('/ai/chat', { messages }),
+  chat: (messages, config = {}) => request.post('/ai/chat', { messages, ...config }),
   // Agent 对话：可执行下单/查询/评价/退款等操作，返回 { reply, actions }
-  agent: (messages) => request.post('/ai/agent', { messages })
+  agent: (messages, config = {}) => request.post('/ai/agent', { messages, ...config })
 }
 
 // ============ 文件上传 ============

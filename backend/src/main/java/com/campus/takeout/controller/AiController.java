@@ -7,10 +7,14 @@ import com.campus.takeout.service.AgentService;
 import com.campus.takeout.service.AiService;
 import com.campus.takeout.vo.AgentReplyVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 智能助手接口：仅登录用户可用（受全局登录拦截器保护），后端代理调用大模型。
@@ -23,6 +27,14 @@ public class AiController {
     private AiService aiService;
     @Autowired
     private AgentService agentService;
+
+    /** 查询后端是否已经配置 AI 口令；用于前端决定是否弹出手动配置框 */
+    @GetMapping("/config")
+    public Result<Map<String, Boolean>> config() {
+        Map<String, Boolean> data = new HashMap<>();
+        data.put("configured", agentService.hasServerConfig());
+        return Result.success(data);
+    }
 
     /** 智能点餐助手对话 */
     @PostMapping("/chat")

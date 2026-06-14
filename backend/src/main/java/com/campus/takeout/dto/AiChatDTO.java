@@ -13,6 +13,15 @@ public class AiChatDTO {
     /** 多轮消息列表，role 取 user / assistant，content 为文本内容 */
     private List<Message> messages;
 
+    /** 前台临时填写的 OpenAI 兼容接口地址；后端未配置时用于本次请求，不落库 */
+    private String apiUrl;
+
+    /** 前台临时填写的接口口令；后端未配置时用于本次请求，不落库 */
+    private String apiPassword;
+
+    /** 前台临时填写的模型名称；后端未配置时用于本次请求，不落库 */
+    private String model;
+
     @Data
     public static class Message {
         private String role;

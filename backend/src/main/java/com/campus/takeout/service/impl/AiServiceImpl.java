@@ -10,6 +10,7 @@ import com.campus.takeout.service.AiService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -63,15 +64,22 @@ public class AiServiceImpl implements AiService {
             }
         }
 
+        String effectiveApiUrl = StringUtils.hasText(apiUrl) ? apiUrl : dto.getApiUrl();
+        String effectivePassword = StringUtils.hasText(apiPassword) ? apiPassword : dto.getApiPassword();
+        String effectiveModel = StringUtils.hasText(model) ? model : dto.getModel();
+        if (!StringUtils.hasText(effectiveApiUrl) || !StringUtils.hasText(effectivePassword) || !StringUtils.hasText(effectiveModel)) {
+            throw new RuntimeException("请先配置 AI 接口地址、口令和模型");
+        }
+
         JSONObject body = new JSONObject();
-        body.set("model", model);
+        body.set("model", effectiveModel);
         body.set("messages", messages);
         body.set("temperature", 0.7);
         body.set("max_tokens", maxTokens);
         body.set("stream", false);
 
-        try (HttpResponse resp = HttpRequest.post(apiUrl)
-                .header("Authorization", "Bearer " + apiPassword)
+        try (HttpResponse resp = HttpRequest.post(effectiveApiUrl)
+                .header("Authorization", "Bearer " + effectivePassword)
                 .header("Content-Type", "application/json")
                 .body(body.toString())
                 .timeout(30000)
